@@ -1,0 +1,57 @@
+# ─────────────────────────────────────────────────────────────
+# Peace Protocols — PRIVACY TIER / DATA SOVEREIGNTY CONFIGURATION (example)
+# Copy to config/privacy-tiers.toml (git-ignored) and edit.
+# Controls what — if anything — ever leaves your device.
+# ─────────────────────────────────────────────────────────────
+
+# TIER DEFINITIONS
+# 1 = Local Only ....... all data stays on device. No network transmission. (DEFAULT)
+# 2 = Self-Hosted Relay  data syncs across YOUR devices via a relay you run.
+# 3 = Chapter Relay .... data shared (per permission) with a Peace Engineer chapter
+#                        for aggregate Pe/CVI calculation.
+# 4 = Keystone Node .... only ANONYMIZED aggregate indices published to the global
+#                        7,777 keystone coherence node. No individual data.
+
+[defaults]
+# Applied to any domain not explicitly overridden below.
+tier          = 1
+
+[sensitive]
+# These domains are ALWAYS Tier 1 by default and require an explicit, deliberate
+# action to promote. They are never auto-promoted by federation settings.
+ember_financial   = 1     # Ember (Economic Body — DFR): financial data
+river_biometric   = 1     # River (Emotional Body — HRVcoh): biometric/HRV data
+heal_biometric    = 1     # Heal (Health Realm — WAI): health data
+
+# ─────────── Per-domain overrides (Sovereign Bodies) ───────────
+[bodies]
+starfire  = 1   # Spiritual Coherence (Sc)
+sage      = 2   # Information Flow Efficiency (IFE)
+river     = 1   # HRV Coherence (HRVcoh) — biometric, keep local
+stone     = 2   # Local Resource Autonomy (LRA)
+ember     = 1   # Debt Freedom Ratio (DFR) — financial, keep local
+cedar     = 2   # Cultural Continuity Index (CCI)
+summit    = 2   # Sovereignty Participation Ratio (SPR)
+
+# ─────────── Per-domain overrides (Resource Realms) ───────────
+[realms]
+sol       = 2   # Energy Autonomy Ratio (EAR)
+tide      = 2   # Water Sovereignty Index (WSI)
+root      = 2   # Local Nutrition Ratio (LNR)
+heal      = 1   # Wellness Autonomy Index (WAI) — health, keep local
+haven     = 2   # Housing Independence Score (HIS)
+cycle     = 3   # Circularity Index (CI) — safe to share with chapter
+lore      = 2   # Knowledge Liberation Index (KLI)
+mesh      = 2   # Freedom of Flow Ratio (FFR)
+passage   = 2   # Mobility Autonomy Fraction (MAF)
+forge     = 2   # Regenerative Production Ratio (RPR)
+thrive    = 1   # Abundance Finance Index (AFI) — financial, keep local
+council   = 2   # Justice Coherence Index (JCI)
+
+[federation]
+# What Raven is allowed to publish upward when a scope federates.
+# Even at higher tiers, ONLY aggregate Pe/CVI (kinds 30100/30101) cross scope
+# boundaries — never raw domain measurements (kind 30102).
+publish_pe_cvi_aggregate   = true
+publish_raw_domain_data    = false        # keep this false to preserve sovereignty
+require_explicit_consent   = true         # prompt before any off-device transmission

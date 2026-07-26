@@ -1,0 +1,55 @@
+# ─────────────────────────────────────────────────────────────
+# Peace Protocols — LLM PROVIDER CONFIGURATION (example)
+# Copy to config/llm-providers.toml (git-ignored) and edit.
+# API keys are stored locally and are NEVER committed.
+# ─────────────────────────────────────────────────────────────
+
+[llm]
+# Active provider: ollama | anthropic | openai | buzz-mesh
+# "ollama" (local) is the recommended, sovereignty-aligned default —
+# no data ever leaves your device.
+provider      = "ollama"
+
+[agents]
+# Raven (the orchestrator) gets the strongest model; domain agents can use a smaller one.
+raven_model         = "llama3.1:70b"
+domain_agents_model = "llama3.1:8b"
+
+# ───────────────── Option 1: Local (Ollama) — RECOMMENDED ─────────────────
+[providers.ollama]
+# Highest sovereignty: nothing leaves the device. Zero ongoing cost.
+enabled       = true
+model         = "llama3.1:8b"              # or mistral, gemma, etc.
+endpoint      = "http://localhost:11434/v1"
+# If your device can't run the 70b Raven model, set raven_model above to "llama3.1:8b"
+# or use Buzz Mesh (Option 4) to pool compute with your chapter.
+
+# ───────────────── Option 2: Anthropic (Claude) ─────────────────
+[providers.anthropic]
+# Moderate sovereignty: data is sent to Anthropic's API. Best reasoning quality.
+enabled       = false
+model         = "claude-3-5-sonnet-latest"
+api_key       = ""                         # set locally; never commit
+endpoint      = "https://api.anthropic.com"
+
+# ───────────────── Option 3: OpenAI (GPT-4o / o1) ─────────────────
+[providers.openai]
+# Moderate sovereignty: data is sent to OpenAI's API.
+enabled       = false
+model         = "gpt-4o"
+api_key       = ""                         # set locally; never commit
+endpoint      = "https://api.openai.com/v1"
+
+# ───────────────── Option 4: Buzz Mesh (Community Compute Pool) ─────────────────
+[providers.buzz-mesh]
+# High sovereignty: compute pooled among trusted Peace Engineer chapter members
+# via Buzz Mesh (iroh-based GPU sharing). Best for active chapters.
+enabled       = false
+model         = "llama3.1:70b"
+chapter_relay = ""                         # your chapter's relay url
+opt_in_pool   = false                      # contribute your GPU to the pool
+
+[defaults]
+temperature   = 0.4
+max_tokens    = 4096
+timeout_secs  = 120

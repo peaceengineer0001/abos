@@ -1,0 +1,37 @@
+# Forge — Agent Configuration
+# Agent 17 of 20 · Resource Realm
+# Part of the Raven Council (Peace Protocols Raven Network)
+
+[agent]
+name          = "forge"
+display_name  = "⚒️ Forge"
+number        = 17
+layer         = "resource_realm"
+domain        = "Manufacturing Realm — Manufacturing Sovereignty"
+channel       = "#forge-manufacturing"
+nip05         = "forge@your-relay.domain"
+enabled       = true
+
+[index]
+name          = "Regenerative Production Ratio"
+abbreviation  = "RPR"
+formula       = "RPR = local_production / local_demand"
+
+[llm]
+# Uses the domain-agent model from config/llm-providers.toml by default.
+model         = "domain_agents_model  # inherits from config/llm-providers.toml"
+temperature   = 0.4
+
+[mcp]
+transport     = "stdio"      # stdio for local agents; "sse" for remote
+endpoint      = "ws://localhost:4736"
+auth          = "nip42"      # relay authentication (inherited from Buzz)
+
+[privacy]
+# 1 = local only, 2 = self-hosted relay, 3 = chapter relay, 4 = keystone aggregate
+tier          = 2
+sensitive     = false   # true = never auto-promote above tier 1
+
+[workflow]
+loop          = "6d"          # Discover -> Decipher -> Design -> Develop -> Deploy -> Defend
+report_to     = "raven"       # aggregates into Pe + CVI

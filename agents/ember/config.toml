@@ -1,0 +1,37 @@
+# Ember — Agent Configuration
+# Agent 5 of 20 · Sovereign Body
+# Part of the Raven Council (Peace Protocols Raven Network)
+
+[agent]
+name          = "ember"
+display_name  = "🔥 Ember"
+number        = 5
+layer         = "sovereign_body"
+domain        = "Economic Body — Freedom from Debt"
+channel       = "#ember-economic"
+nip05         = "ember@your-relay.domain"
+enabled       = true
+
+[index]
+name          = "Debt Freedom Ratio"
+abbreviation  = "DFR"
+formula       = "DFR = 1 − (Debt / Income)  (DFR = 1 is debt-free; DFR < 0 is net negative)"
+
+[llm]
+# Uses the domain-agent model from config/llm-providers.toml by default.
+model         = "domain_agents_model  # inherits from config/llm-providers.toml"
+temperature   = 0.4
+
+[mcp]
+transport     = "stdio"      # stdio for local agents; "sse" for remote
+endpoint      = "ws://localhost:4736"
+auth          = "nip42"      # relay authentication (inherited from Buzz)
+
+[privacy]
+# 1 = local only, 2 = self-hosted relay, 3 = chapter relay, 4 = keystone aggregate
+tier          = 1
+sensitive     = true   # true = never auto-promote above tier 1
+
+[workflow]
+loop          = "6d"          # Discover -> Decipher -> Design -> Develop -> Deploy -> Defend
+report_to     = "raven"       # aggregates into Pe + CVI

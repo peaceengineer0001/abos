@@ -1,0 +1,37 @@
+# Sage — Agent Configuration
+# Agent 2 of 20 · Sovereign Body
+# Part of the Raven Council (Peace Protocols Raven Network)
+
+[agent]
+name          = "sage"
+display_name  = "🦉 Sage"
+number        = 2
+layer         = "sovereign_body"
+domain        = "Mental Body — Systems Literacy"
+channel       = "#sage-mental"
+nip05         = "sage@your-relay.domain"
+enabled       = true
+
+[index]
+name          = "Information Flow Efficiency"
+abbreviation  = "IFE"
+formula       = "IFE = knowledge_applied / knowledge_consumed  (IFE near 1 = learning converted to action; near 0 = extractive education)"
+
+[llm]
+# Uses the domain-agent model from config/llm-providers.toml by default.
+model         = "domain_agents_model  # inherits from config/llm-providers.toml"
+temperature   = 0.4
+
+[mcp]
+transport     = "stdio"      # stdio for local agents; "sse" for remote
+endpoint      = "ws://localhost:4736"
+auth          = "nip42"      # relay authentication (inherited from Buzz)
+
+[privacy]
+# 1 = local only, 2 = self-hosted relay, 3 = chapter relay, 4 = keystone aggregate
+tier          = 2
+sensitive     = false   # true = never auto-promote above tier 1
+
+[workflow]
+loop          = "6d"          # Discover -> Decipher -> Design -> Develop -> Deploy -> Defend
+report_to     = "raven"       # aggregates into Pe + CVI

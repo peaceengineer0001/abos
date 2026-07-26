@@ -1,0 +1,37 @@
+# Thrive — Agent Configuration
+# Agent 18 of 20 · Resource Realm
+# Part of the Raven Council (Peace Protocols Raven Network)
+
+[agent]
+name          = "thrive"
+display_name  = "🌾 Thrive"
+number        = 18
+layer         = "resource_realm"
+domain        = "Economics Realm — Economic Sovereignty"
+channel       = "#thrive-economics"
+nip05         = "thrive@your-relay.domain"
+enabled       = true
+
+[index]
+name          = "Abundance Finance Index"
+abbreviation  = "AFI"
+formula       = "AFI = value_created / debt_issued  (AFI > 1 = operating in abundance; < 1 = leaking value into debt)"
+
+[llm]
+# Uses the domain-agent model from config/llm-providers.toml by default.
+model         = "domain_agents_model  # inherits from config/llm-providers.toml"
+temperature   = 0.4
+
+[mcp]
+transport     = "stdio"      # stdio for local agents; "sse" for remote
+endpoint      = "ws://localhost:4736"
+auth          = "nip42"      # relay authentication (inherited from Buzz)
+
+[privacy]
+# 1 = local only, 2 = self-hosted relay, 3 = chapter relay, 4 = keystone aggregate
+tier          = 1
+sensitive     = true   # true = never auto-promote above tier 1
+
+[workflow]
+loop          = "6d"          # Discover -> Decipher -> Design -> Develop -> Deploy -> Defend
+report_to     = "raven"       # aggregates into Pe + CVI

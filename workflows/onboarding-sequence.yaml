@@ -1,0 +1,104 @@
+# Raven's Full Onboarding Flow
+# Buzz YAML-as-code Workflow — triggered on first launch of the Raven Network.
+# Guides a new user through scope selection, identity, per-agent intake,
+# baseline Pe/CVI calculation, priority identification, and activation.
+
+name: onboarding-sequence
+version: "0.1.0"
+description: >
+  Raven-guided onboarding: scope selection -> identity context ->
+  domain intake across all 19 agents -> baseline Pe/CVI -> priorities -> activation.
+owner: raven
+channel: "#raven-command"
+
+trigger:
+  event: first_launch          # fires once when no scope-config event (kind 30104) exists
+  manual: true                 # can also be re-run from the dashboard
+
+inputs:
+  parallel_intake:
+    type: boolean
+    default: false             # true = ask all 19 agents at once (faster)
+
+steps:
+  - id: scope-selection
+    agent: raven
+    action: prompt
+    say: "Welcome. I am Raven — your Chief of Staff. Who are we optimizing for?"
+    collect:
+      - key: scope_level
+        type: enum
+        options: [individual, couple, family, house, clan, tribe, congregation, business, nation]
+      - key: members
+        type: integer
+    emits:
+      kind: 30104              # Scope Configuration event
+      tags: { d: "scope", level: "${scope_level}", members: "${members}" }
+
+  - id: identity-context
+    agent: raven
+    action: prompt
+    say: "Tell me about yourself or your organization."
+    collect:
+      - { key: name, type: string }
+      - { key: region, type: string }
+      - { key: tradition, type: string, optional: true }
+      - { key: motivation, type: string }
+
+  - id: domain-intake
+    agent: raven
+    action: delegate
+    description: "Each of the 19 domain agents runs its own intake_questions.md."
+    mode: "${parallel_intake ? 'parallel' : 'sequential'}"
+    delegates:
+      bodies:  [starfire, sage, river, stone, ember, cedar, summit]
+      realms:  [sol, tide, root, heal, haven, cycle, lore, mesh, passage, forge, thrive, council]
+    each:
+      action: run_intake
+      emits:
+        kind: 30102            # Domain Index event per agent
+      privacy: respect_agent_tier   # Ember/River/Heal stay Tier 1
+
+  - id: baseline-calculation
+    agent: raven
+    action: calculate
+    uses:
+      - math/pe_calculator.py
+      - math/cvi_calculator.py
+    say: "Here is where we stand today."
+    emits:
+      - { kind: 30100, tags: { d: "${scope_level}" } }   # Pe Score event
+      - { kind: 30101, tags: { d: "${scope_level}" } }   # CVI Score event
+    output:
+      - pe
+      - pe_normalized
+      - cvi
+      - cvi_status
+      - per_domain_breakdown
+
+  - id: priority-identification
+    agent: raven
+    action: analyze
+    say: "Based on your baseline, your three highest-leverage opportunities are..."
+    collect:
+      - { key: chosen_priority, type: string }
+      - { key: commitment_90d, type: string }
+    output:
+      - top_three_priorities
+
+  - id: activation
+    agent: raven
+    action: activate
+    description: "Start the 6D loop for every agent and schedule the first weekly report."
+    triggers:
+      - workflow: 6d-discover
+        for: all_agents
+      - workflow: weekly-pe-cvi-report
+        schedule: "weekly"
+    emits:
+      kind: 30103              # 6D Loop State: phase = discover, for each agent
+    say: "Your council is ready. I'm activating the 6D loop across all domains now."
+
+on_complete:
+  notify: "#raven-command"
+  message: "Onboarding complete. Pe=${pe} · CVI=${cvi}. First optimization loop is live."

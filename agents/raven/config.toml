@@ -1,0 +1,50 @@
+# Raven — Agent Configuration
+# Agent 20 of 20 · Master Orchestrator / Chief of Staff
+# Coordinates the 19 domain agents and calculates Pe + CVI
+
+[agent]
+name          = "raven"
+display_name  = "🐦‍⬛ Raven"
+number        = 20
+layer         = "master_orchestrator"
+domain        = "Chief of Staff — Orchestrator of the Raven Council"
+channel       = "#raven-command"
+nip05         = "raven@your-relay.domain"
+enabled       = true
+
+[index]
+# Raven owns BOTH master metrics.
+pe_formula    = "Pe = Σ (Rᵢ / Dᵢ) for i = 1..12"
+cvi_formula   = "CVI = (H + Dg + F) / (S + Db + De)"
+sr_formula    = "Sr = ΔC_pos − ΔC_neg"
+
+[llm]
+# Raven gets the strongest model by default (see config/llm-providers.toml).
+model         = "raven_model"
+temperature   = 0.3
+
+[mcp]
+transport     = "stdio"
+endpoint      = "ws://localhost:4736"
+auth          = "nip42"
+
+[orchestration]
+# The 19 domain agents Raven coordinates.
+sovereign_bodies = ["starfire", "sage", "river", "stone", "ember", "cedar", "summit"]
+resource_realms  = ["sol", "tide", "root", "heal", "haven", "cycle", "lore",
+                    "mesh", "passage", "forge", "thrive", "council"]
+report_cadence   = "weekly"       # weekly Pe/CVI synthesis report
+loop             = "6d"           # coordinates the 6D loop across all agents
+
+[nostr_kinds]
+pe_event         = 30100
+cvi_event        = 30101
+domain_index     = 30102
+loop_state       = 30103
+scope_config     = 30104
+coherence_shock  = 30105
+
+[privacy]
+# Raven only ever handles aggregates for federation; raw data stays with each agent.
+tier          = 1
+sensitive     = true

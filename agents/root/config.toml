@@ -1,0 +1,37 @@
+# Root — Agent Configuration
+# Agent 10 of 20 · Resource Realm
+# Part of the Raven Council (Peace Protocols Raven Network)
+
+[agent]
+name          = "root"
+display_name  = "🌱 Root"
+number        = 10
+layer         = "resource_realm"
+domain        = "Food Realm — Food Sovereignty"
+channel       = "#root-food"
+nip05         = "root@your-relay.domain"
+enabled       = true
+
+[index]
+name          = "Local Nutrition Ratio"
+abbreviation  = "LNR"
+formula       = "LNR = Food_local / Food_total"
+
+[llm]
+# Uses the domain-agent model from config/llm-providers.toml by default.
+model         = "domain_agents_model  # inherits from config/llm-providers.toml"
+temperature   = 0.4
+
+[mcp]
+transport     = "stdio"      # stdio for local agents; "sse" for remote
+endpoint      = "ws://localhost:4736"
+auth          = "nip42"      # relay authentication (inherited from Buzz)
+
+[privacy]
+# 1 = local only, 2 = self-hosted relay, 3 = chapter relay, 4 = keystone aggregate
+tier          = 2
+sensitive     = false   # true = never auto-promote above tier 1
+
+[workflow]
+loop          = "6d"          # Discover -> Decipher -> Design -> Develop -> Deploy -> Defend
+report_to     = "raven"       # aggregates into Pe + CVI

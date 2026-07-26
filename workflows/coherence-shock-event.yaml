@@ -1,0 +1,81 @@
+# Coherence Shock Event — Community Event Coordination
+# Buzz YAML-as-code Workflow. Raven engineers a POSITIVE coherence shock
+# (celebration, milestone, surplus-sharing, synchronization moment) to raise CVI
+# and keep the Resilience Delta (Sr) > 0.
+
+name: coherence-shock-event
+version: "0.1.0"
+description: "Coordinate a positive community event that raises coherence and CVI."
+owner: raven
+channel: "#raven-command"
+
+trigger:
+  manual: true
+  # Auto-triggered by the weekly report when Sr <= 0, or on a milestone.
+  on_event:
+    kind: 30102
+    when: "milestone_reached == true"     # e.g. first debt-free member, microgrid online
+
+inputs:
+  shock_type:
+    type: enum
+    options: [milestone_celebration, community_event, surplus_sharing, synchronization]
+    default: milestone_celebration
+  scope_level:
+    type: string
+    default: "tribe"
+  expected_delta:
+    type: float
+    default: 0.05         # expected coherence gain (ΔC_pos)
+
+steps:
+  - id: design-event
+    agent: raven
+    action: design
+    description: "Design the event: purpose, participants, ritual, and coherence goal."
+    consults:
+      - starfire          # spiritual coherence / ceremony
+      - cedar             # cultural continuity / story
+      - river             # emotional coherence
+    output: [event_plan]
+
+  - id: announce
+    action: post
+    channel: "#raven-command"
+    emits:
+      kind: 30105         # Coherence Shock event (positive)
+      tags:
+        type: "positive"
+        shock_type: "${shock_type}"
+        scope: "${scope_level}"
+        starts_at: "${event_plan.starts_at}"
+        delta: "${expected_delta}"
+    template: |
+      🎉 **Coherence Shock: ${shock_type}**
+      ${event_plan.description}
+      When: ${event_plan.starts_at} · Scope: ${scope_level}
+      Purpose: raise CVI and keep Sr > 0.
+
+  - id: run-event
+    action: coordinate
+    description: "Send reminders, coordinate participation, and gather attendance."
+
+  - id: measure-impact
+    action: measure_coherence_delta
+    description: "Measure the actual ΔC_pos (CVI change) in the days after the event."
+    window: "7d"
+    uses: math/sr_calculator.py
+    emits:
+      kind: 30105         # updated with measured delta
+      tags: { type: "positive", measured: true }
+    output: [measured_delta]
+
+  - id: feed-resilience-delta
+    action: report
+    to: raven
+    description: "Feed measured ΔC_pos into the Resilience Delta so Sr reflects the shock."
+    payload: [shock_type, expected_delta, measured_delta]
+
+on_complete:
+  notify: "#raven-command"
+  message: "Coherence shock '${shock_type}' complete. Measured ΔC_pos=${measured_delta}."

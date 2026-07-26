@@ -1,0 +1,64 @@
+# 6D Loop — DISCOVER Phase
+# Buzz YAML-as-code Workflow. Runs the Discover phase for one or all agents:
+# collect raw domain data, establish a baseline, and post findings to the agent's Canvas.
+
+name: 6d-discover
+version: "0.1.0"
+description: "Discover phase of the 6D loop — gather raw data and establish a domain baseline."
+owner: raven
+phase: discover
+
+trigger:
+  manual: true
+  # Also triggered by onboarding-sequence (activation step) and by 6d-defend feedback.
+  on_event:
+    kind: 30103
+    when: "phase == 'defend' && cycle_complete == true"   # Defend feeds back into Discover
+
+inputs:
+  agent:
+    type: string
+    description: "Agent slug (e.g. 'sol') or 'all' to run every domain agent."
+    default: "all"
+
+steps:
+  - id: run-intake
+    action: run_intake
+    for: "${agent}"
+    description: "Ask the agent's intake_questions.md and connect any available data sources."
+    collect: from_agent_intake        # reads agents/<agent>/intake_questions.md
+
+  - id: connect-sources
+    action: connect_data_sources
+    optional: true
+    sources:
+      - wearables          # River (HRV), Heal
+      - financial_apps     # Ember, Thrive  (Tier 1 — local only)
+      - meters             # Sol (kWh), Tide (liters)
+      - local_records      # Root, Haven, Passage, Forge
+
+  - id: establish-baseline
+    action: measure
+    description: "Compute the current index value from collected data."
+    uses: math/index_calculators/all_indexes.py
+    emits:
+      kind: 30102          # Domain Index event
+      tags: { agent: "${agent}", phase: "discover" }
+
+  - id: post-to-canvas
+    action: post_canvas
+    channel: "agent_channel"
+    content: >
+      Baseline discovered. Current ${index_abbr} = ${value}.
+      Largest dependency identified for Decipher phase.
+
+  - id: advance-phase
+    action: set_phase
+    next: decipher
+    emits:
+      kind: 30103          # 6D Loop State event
+      tags: { agent: "${agent}", phase: "decipher" }
+
+on_complete:
+  notify: "#raven-command"
+  message: "Discover complete for ${agent}. Advancing to Decipher."

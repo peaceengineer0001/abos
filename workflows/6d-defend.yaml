@@ -1,0 +1,71 @@
+# 6D Loop — DEFEND Phase (Monitoring)
+# Buzz YAML-as-code Workflow. Continuously monitors a domain index, alerts on
+# regression, designs counter-responses to shocks, and feeds results back into Discover.
+
+name: 6d-defend
+version: "0.1.0"
+description: "Defend phase — protect sovereignty gains, detect regression, restart the loop."
+owner: raven
+phase: defend
+
+trigger:
+  schedule: "daily"        # continuous monitoring cadence (override per agent)
+  manual: true
+  on_event:
+    kind: 30103
+    when: "phase == 'deploy' && deployed == true"   # begins after Deploy
+
+inputs:
+  agent:
+    type: string
+    default: "all"
+  regression_threshold:
+    type: float
+    default: 0.05          # alert if index drops more than 5% vs. last measurement
+
+steps:
+  - id: re-measure
+    action: measure
+    for: "${agent}"
+    uses: math/index_calculators/all_indexes.py
+    emits:
+      kind: 30102          # fresh Domain Index event
+      tags: { agent: "${agent}", phase: "defend" }
+
+  - id: detect-regression
+    action: compare
+    baseline: last_measurement
+    current: "${re-measure.value}"
+    condition: "delta < -${regression_threshold}"
+    on_true:
+      - action: alert
+        channel: "#raven-command"
+        severity: warning
+        message: "⚠️ ${agent} ${index_abbr} regressed by ${delta}. Sovereignty is eroding."
+      - action: design_counter_response
+        description: "Draft a counter-response to the detected shock and route to the agent."
+
+  - id: estimate-negative-shock
+    action: estimate_delta_cneg
+    description: "Estimate coherence loss (ΔC_neg) from any regression for the Resilience Delta."
+    uses: math/sr_calculator.py
+    emits:
+      kind: 30105          # Coherence Shock event (negative)
+      tags: { type: "negative", agent: "${agent}" }
+
+  - id: report-to-raven
+    action: report
+    to: raven
+    payload: [index_abbr, value, delta, regression_detected]
+
+  - id: feedback-to-discover
+    action: set_phase
+    next: discover
+    when: "cycle_interval_elapsed == true"
+    emits:
+      kind: 30103          # loop restarts: Defend -> Discover
+      tags: { agent: "${agent}", phase: "discover", cycle_complete: true }
+
+on_complete:
+  notify: "#raven-command"
+  message: "Defend cycle complete for ${agent}. Gains monitored; loop continues."

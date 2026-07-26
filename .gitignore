@@ -1,0 +1,92 @@
+# ─────────────────────────────────────────────
+# Peace Protocols Raven Network — .gitignore
+# Covers Rust, Node, Tauri, Python, and local sovereignty data
+# ─────────────────────────────────────────────
+
+# ===== Rust (Buzz backend / peace-protocols crates) =====
+/target/
+**/target/
+**/*.rs.bk
+*.pdb
+Cargo.lock.orig
+
+# ===== Node / JavaScript / TypeScript (React 19 frontend) =====
+node_modules/
+dist/
+dist-ssr/
+build/
+.cache/
+*.local
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.pnpm-store/
+.eslintcache
+
+# ===== Tauri 2 (desktop app) =====
+/src-tauri/target/
+**/src-tauri/target/
+/src-tauri/gen/
+*.app
+*.dmg
+*.AppImage
+*.deb
+*.msi
+*.exe
+
+# ===== Python (math calculators) =====
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+.venv/
+venv/
+env/
+ENV/
+
+# ===== Environment & Secrets =====
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+secrets.toml
+
+# ===== Sovereignty / Local User Data (NEVER commit) =====
+# Live configs generated from the .example templates
+config/peace-protocols.toml
+config/scope-config.toml
+config/llm-providers.toml
+config/privacy-tiers.toml
+# Local relay data, keypairs, and measurement stores
+/relay-data/
+/.raven/
+*.nostr-key
+user-data/
+canvases/
+
+# ===== Auto-generated document previews =====
+# We keep only source .md and the whitepaper/*.pdf documents.
+# Ignore auto-generated preview exports of markdown files.
+# Auto-generated preview exports of source Markdown (docx/pdf) anywhere in the
+# tree are ignored; only the curated whitepaper PDFs are tracked.
+**/*.docx
+**/*.pdf
+!whitepaper/
+!whitepaper/*.pdf
+
+# ===== OS / Editor cruft =====
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.idea/
+.vscode/
+*.log

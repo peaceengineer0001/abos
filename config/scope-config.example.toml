@@ -1,0 +1,54 @@
+# ─────────────────────────────────────────────────────────────
+# Peace Protocols — SCOPE CONFIGURATION (example)
+# Defines which level of human organization the Raven Network optimizes for.
+# Copy to config/scope-config.toml (git-ignored) and edit.
+# See docs/scope-selector.md for full explanations.
+# ─────────────────────────────────────────────────────────────
+
+[scope]
+# One of: individual | couple | family | house | clan | tribe |
+#         congregation | business | nation
+level         = "family"
+
+# Number of people included in this scope.
+members       = 4
+
+# The Buzz Community / relay id that isolates this scope's data.
+community_id  = ""                         # npub or community id; empty = local only
+
+# Human-readable label for this scope (shown in the dashboard).
+label         = "The Example Household"
+
+# Region / watershed — used by realm agents to define what counts as "local".
+region        = "Pacific Northwest"
+
+[federation]
+# Publish this scope's AGGREGATE Pe/CVI upward to a parent scope. Empty = stay local.
+# Raw domain data (kind 30102) NEVER leaves this scope without explicit promotion.
+publish_aggregates_to = ""                 # e.g. "clan" | "tribe" | parent relay npub
+privacy_tier          = 1                  # 1 = local only (default)
+
+[focus]
+# Optional: pin the first domains to optimize. If empty, Raven recommends from baseline.
+# Typical first focus by level (from docs/scope-selector.md):
+#   individual  -> ["DFR", "LRA", "EAR"]
+#   couple      -> ["HIS", "AFI", "Sc"]
+#   family      -> ["LNR", "HIS", "KLI"]
+#   house       -> ["EAR", "WSI", "CI"]
+#   clan        -> ["LNR", "MAF", "AFI"]
+#   tribe       -> ["SPR", "EAR", "WSI"]
+#   congregation-> ["Sc", "CCI", "AFI", "WAI"]
+#   business    -> ["EAR", "RPR", "AFI", "FFR"]
+#   nation      -> ["ALL", "lambda2"]
+priorities    = ["LNR", "HIS", "KLI"]
+
+[nation]
+# Only used when level = "nation": network-topology resilience metrics.
+track_lambda2         = false              # algebraic connectivity of the community network
+track_hub_betweenness = false              # structural single-point-of-failure risk
+
+[aggregation]
+# How individual member metrics roll up into this scope's Pe/CVI.
+# "sum" for resource realms (Pe is a sum of ratios), "mean" for normalized bodies.
+pe_method     = "sum"
+cvi_method    = "mean"

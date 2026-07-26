@@ -1,0 +1,37 @@
+# Cedar — Agent Configuration
+# Agent 6 of 20 · Sovereign Body
+# Part of the Raven Council (Peace Protocols Raven Network)
+
+[agent]
+name          = "cedar"
+display_name  = "🌲 Cedar"
+number        = 6
+layer         = "sovereign_body"
+domain        = "Cultural Body — Identity and Story"
+channel       = "#cedar-cultural"
+nip05         = "cedar@your-relay.domain"
+enabled       = true
+
+[index]
+name          = "Cultural Continuity Index"
+abbreviation  = "CCI"
+formula       = "CCI = (traditions_preserved + innovations_adopted) / total_cultural_assets  (high CCI = holds its past while choosing its future)"
+
+[llm]
+# Uses the domain-agent model from config/llm-providers.toml by default.
+model         = "domain_agents_model  # inherits from config/llm-providers.toml"
+temperature   = 0.4
+
+[mcp]
+transport     = "stdio"      # stdio for local agents; "sse" for remote
+endpoint      = "ws://localhost:4736"
+auth          = "nip42"      # relay authentication (inherited from Buzz)
+
+[privacy]
+# 1 = local only, 2 = self-hosted relay, 3 = chapter relay, 4 = keystone aggregate
+tier          = 2
+sensitive     = false   # true = never auto-promote above tier 1
+
+[workflow]
+loop          = "6d"          # Discover -> Decipher -> Design -> Develop -> Deploy -> Defend
+report_to     = "raven"       # aggregates into Pe + CVI

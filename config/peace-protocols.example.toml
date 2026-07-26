@@ -1,0 +1,70 @@
+# ─────────────────────────────────────────────────────────────
+# Peace Protocols Raven Network — MASTER CONFIGURATION (example)
+# Copy to config/peace-protocols.toml (git-ignored) and edit.
+# scripts/setup.sh does this copy for you on first run.
+# ─────────────────────────────────────────────────────────────
+
+[network]
+# Human-readable name for this Raven Network instance.
+name          = "My Raven Network"
+# Semantic version of the Peace Protocols content this instance targets.
+version       = "0.1.0"
+
+[relay]
+# The Buzz relay this instance talks to. Default is a LOCAL relay on your machine.
+# Sovereignty-first: keep this on localhost unless you run your own remote relay.
+host          = "localhost"
+port          = 4736                      # Buzz relay WebSocket port
+url           = "ws://localhost:4736"     # full relay URL (NIP-01)
+auth          = "nip42"                   # relay authentication scheme
+
+[identity]
+# Your secp256k1 keypair. Leave npub/nsec empty to have setup generate one.
+# NEVER commit your nsec (private key). It is stored encrypted at rest.
+npub          = ""                        # your public key (bech32)
+# nsec is stored in the OS keychain / encrypted store, not in this file.
+
+[scope]
+# Which level of human organization are we optimizing for?
+# See config/scope-config.example.toml for full scope settings.
+level         = "individual"              # individual|couple|family|house|clan|tribe|congregation|business|nation
+
+[agents]
+# The full Raven Council is enabled by default (all 20 agents).
+enable_all    = true
+# To run a subset, set enable_all = false and list the agents you want:
+# enabled     = ["raven", "sol", "ember", "root"]
+# Path (relative to repo root) where agent folders live.
+agents_dir    = "agents"
+
+[llm]
+# LLM provider selection. Full options in config/llm-providers.example.toml.
+# "ollama" (local) is the recommended, sovereignty-aligned default.
+provider      = "ollama"                  # ollama|anthropic|openai|buzz-mesh
+
+[metrics]
+# Master metric reporting cadence and normalization.
+report_cadence      = "weekly"            # how often Raven publishes Pe/CVI
+normalize_pe        = true                # also report Pe / 12 (0–1 style)
+track_resilience_dr = true                # compute the Resilience Delta (Sr)
+
+[privacy]
+# Default privacy tier for domains that don't override it.
+# 1 = local only (default), 2 = self-hosted relay, 3 = chapter, 4 = keystone aggregate.
+# See config/privacy-tiers.example.toml for per-domain overrides.
+default_tier  = 1
+
+[federation]
+# Voluntary, additive federation with a larger scope. Empty = fully local.
+# Only AGGREGATE Pe/CVI events (kinds 30100/30101) are ever published upward.
+publish_aggregates_to = ""                # e.g. "clan" or a parent relay npub
+keystone_node         = ""                # global 7,777 aggregate node (optional)
+
+[nostr_kinds]
+# Custom Peace Protocols event kinds (see ARCHITECTURE.md).
+pe_event         = 30100
+cvi_event        = 30101
+domain_index     = 30102
+loop_state       = 30103
+scope_config     = 30104
+coherence_shock  = 30105
