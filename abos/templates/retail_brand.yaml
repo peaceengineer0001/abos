@@ -1,0 +1,64 @@
+business_type: retail_brand
+display_name: Retail Brand
+description: >
+  Omnichannel retail brand managing inventory, POS, seasonal campaigns, and
+  supplier terms across DTC and wholesale.
+
+priority_agents:
+  - OperationsDirector
+  - MarketingDirector
+  - FinanceDirector
+  - GrowthDirector
+
+kpis:
+  - key: gmv
+    label: Gross Merchandise Value (monthly)
+    unit: usd
+    target: 450000
+  - key: inventory_turns
+    label: Inventory Turns (annual)
+    unit: ratio
+    target: 6
+  - key: gross_margin_pct
+    label: Gross Margin
+    unit: percent
+    target: 55
+  - key: sell_through_pct
+    label: Sell-Through Rate
+    unit: percent
+    target: 80
+  - key: return_rate_pct
+    label: Return Rate
+    unit: percent
+    target: 8
+    direction: lower_is_better
+
+workflows:
+  - name: inventory_management
+    owner: OperationsDirector
+    sla_target_pct: 93
+  - name: seasonal_campaign
+    owner: MarketingDirector
+  - name: supplier_terms
+    owner: FinanceDirector
+    high_impact: true
+  - name: pos_reconciliation
+    owner: FinanceDirector
+
+rubric_overrides:
+  operational_efficiency: 0.20
+  growth_momentum: 0.20
+  financial_health: 0.15
+
+required_filings:
+  - Sales tax filings
+  - Reseller permits
+
+integration_stubs:
+  - shopify_pos
+  - stripe_payments
+
+evidence_focus:
+  - metric_feed
+  - financial_record
+  - contract

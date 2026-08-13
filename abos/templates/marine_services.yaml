@@ -1,0 +1,66 @@
+business_type: marine_services
+display_name: Marine Services
+description: >
+  Yacht / vessel services operator managing permits, maintenance schedules,
+  vendor compliance, charter bookings, and partner follow-up. This is the
+  worked example in the BOSS presenter brief.
+
+priority_agents:
+  - ComplianceOfficer
+  - OperationsDirector
+  - FinanceDirector
+  - ClientSuccessDirector
+  - RiskManager
+
+kpis:
+  - key: vessels_active
+    label: Active Vessels
+    unit: count
+    target: 12
+  - key: permit_compliance_pct
+    label: Permit Compliance
+    unit: percent
+    target: 100
+  - key: maintenance_on_schedule_pct
+    label: Maintenance On Schedule
+    unit: percent
+    target: 95
+  - key: charter_utilization_pct
+    label: Charter Utilization
+    unit: percent
+    target: 70
+  - key: vendor_compliance_pct
+    label: Vendor Compliance
+    unit: percent
+    target: 98
+
+workflows:
+  - name: permit_renewals
+    owner: ComplianceOfficer
+    high_impact: true
+  - name: maintenance_scheduling
+    owner: OperationsDirector
+    sla_target_pct: 95
+  - name: vendor_compliance
+    owner: ComplianceOfficer
+  - name: charter_booking
+    owner: ClientSuccessDirector
+  - name: partner_followup
+    owner: ClientSuccessDirector
+
+rubric_overrides:
+  compliance_posture: 0.20
+  risk_exposure: 0.20
+  operational_efficiency: 0.15
+
+required_filings:
+  - USCG vessel documentation
+  - State registration renewal
+  - Charter operating permit
+  - Insurance certificate
+
+evidence_focus:
+  - compliance_filing
+  - contract
+  - counterparty_data
+  - project_status

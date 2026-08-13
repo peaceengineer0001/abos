@@ -1,0 +1,31 @@
+# ABOS — Agentic Business Operating System
+# Brings up the ABOS API (with an in-process Nostr bus) and, optionally, an
+# external Nostr relay the WorkspaceBus can be pointed at.
+services:
+  api:
+    build: .
+    container_name: abos-api
+    ports:
+      - "8000:8000"
+    environment:
+      # Point the WorkspaceBus at the bundled relay instead of the in-process
+      # LocalRelay by setting ABOS_NOSTR_RELAY. Leave unset to use LocalRelay.
+      ABOS_NOSTR_RELAY: ""
+    command: ["uvicorn", "abos.api.main:app", "--host", "0.0.0.0", "--port", "8000"]
+    restart: unless-stopped
+
+  # Optional external Nostr relay. Enable with:  docker compose --profile relay up
+  relay:
+    image: scsibug/nostr-rs-relay:latest
+    container_name: abos-nostr-relay
+    profiles: ["relay"]
+    ports:
+      - "7000:8080"
+    restart: unless-stopped
+
+  # One-shot: run the scripted two-scenario BOSS demo, then exit.
+  demo:
+    build: .
+    container_name: abos-demo
+    profiles: ["demo"]
+    command: ["python3", "scripts/run-boss-demo.py"]

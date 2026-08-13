@@ -1,0 +1,64 @@
+business_type: restaurant_group
+display_name: Restaurant Group
+description: >
+  Multi-location restaurant group managing health compliance, food cost,
+  labor, reservations, and per-location performance.
+
+priority_agents:
+  - OperationsDirector
+  - ComplianceOfficer
+  - FinanceDirector
+  - PeopleDirector
+
+kpis:
+  - key: locations
+    label: Locations
+    unit: count
+    target: 6
+  - key: food_cost_pct
+    label: Food Cost
+    unit: percent
+    target: 30
+    direction: lower_is_better
+  - key: labor_cost_pct
+    label: Labor Cost
+    unit: percent
+    target: 28
+    direction: lower_is_better
+  - key: health_score_avg
+    label: Avg Health Inspection Score
+    unit: score
+    target: 95
+  - key: table_turnover
+    label: Table Turnover (per night)
+    unit: ratio
+    target: 2.5
+
+workflows:
+  - name: location_management
+    owner: OperationsDirector
+  - name: health_compliance
+    owner: ComplianceOfficer
+    high_impact: true
+  - name: food_cost_control
+    owner: FinanceDirector
+  - name: reservation_flow
+    owner: OperationsDirector
+    sla_target_pct: 90
+  - name: staff_scheduling
+    owner: PeopleDirector
+
+rubric_overrides:
+  compliance_posture: 0.20
+  operational_efficiency: 0.20
+  financial_health: 0.15
+
+required_filings:
+  - Health department permits
+  - Liquor license renewal
+  - Food handler certifications
+
+evidence_focus:
+  - compliance_filing
+  - financial_record
+  - metric_feed

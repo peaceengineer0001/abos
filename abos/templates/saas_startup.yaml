@@ -1,0 +1,64 @@
+business_type: saas_startup
+display_name: SaaS Startup
+description: >
+  Product-led SaaS company optimizing MRR/ARR growth, churn, and burn while
+  keeping SOC2-track compliance and sprint delivery on rails.
+
+# Which specialists to emphasize (all 11 always run; these are prioritized).
+priority_agents:
+  - GrowthDirector
+  - FinanceDirector
+  - ClientSuccessDirector
+  - OperationsDirector
+
+kpis:
+  - key: mrr
+    label: Monthly Recurring Revenue
+    unit: usd
+    target: 120000
+  - key: arr
+    label: Annual Recurring Revenue
+    unit: usd
+    target: 1440000
+  - key: net_churn_pct
+    label: Net Revenue Churn
+    unit: percent
+    target: 2.0
+    direction: lower_is_better
+  - key: cac
+    label: Customer Acquisition Cost
+    unit: usd
+    target: 900
+    direction: lower_is_better
+  - key: ltv_cac_ratio
+    label: "LTV : CAC"
+    unit: ratio
+    target: 3.0
+  - key: runway_months
+    label: Cash Runway
+    unit: months
+    target: 12
+
+workflows:
+  - name: sprint_delivery
+    owner: OperationsDirector
+    sla_target_pct: 90
+  - name: renewal_management
+    owner: ClientSuccessDirector
+  - name: fundraise_readiness
+    owner: FinanceDirector
+    high_impact: true
+
+rubric_overrides:
+  growth_momentum: 0.20
+  financial_health: 0.20
+  client_health: 0.15
+
+required_filings:
+  - Delaware franchise tax
+  - SOC2 Type I readiness
+
+evidence_focus:
+  - financial_record
+  - metric_feed
+  - contract

@@ -1,0 +1,63 @@
+business_type: professional_services
+display_name: Professional Services Firm
+description: >
+  Law / accounting / advisory firm managing matters/engagements, billing
+  milestones, compliance filings, and trust-account controls.
+
+priority_agents:
+  - ComplianceOfficer
+  - FinanceDirector
+  - OperationsDirector
+  - RiskManager
+
+kpis:
+  - key: active_matters
+    label: Active Matters/Engagements
+    unit: count
+    target: 40
+  - key: billable_hours
+    label: Billable Hours (monthly)
+    unit: hours
+    target: 1200
+  - key: realization_rate
+    label: Realization Rate
+    unit: percent
+    target: 92
+  - key: wip_days
+    label: Work-in-Progress Days
+    unit: days
+    target: 45
+    direction: lower_is_better
+  - key: compliance_on_time_pct
+    label: Filings On Time
+    unit: percent
+    target: 100
+
+workflows:
+  - name: matter_tracking
+    owner: OperationsDirector
+  - name: billing_milestones
+    owner: FinanceDirector
+    high_impact: true
+  - name: compliance_filings
+    owner: ComplianceOfficer
+    high_impact: true
+  - name: conflict_check
+    owner: RiskManager
+    high_impact: true
+
+rubric_overrides:
+  compliance_posture: 0.22
+  financial_health: 0.18
+  risk_exposure: 0.15
+
+required_filings:
+  - Professional liability insurance
+  - Bar/CPA compliance filings
+  - Trust account reconciliation
+
+evidence_focus:
+  - contract
+  - compliance_filing
+  - financial_record
+  - counterparty_data

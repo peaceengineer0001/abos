@@ -1,0 +1,58 @@
+business_type: boutique_agency
+display_name: Boutique Agency
+description: >
+  Creative / consulting agency managing retainers, project utilization, client
+  NPS, and a bench of contractors and vendors.
+
+priority_agents:
+  - ClientSuccessDirector
+  - OperationsDirector
+  - PeopleDirector
+  - FinanceDirector
+
+kpis:
+  - key: retainer_mrr
+    label: Retainer Revenue (monthly)
+    unit: usd
+    target: 85000
+  - key: utilization_pct
+    label: Billable Utilization
+    unit: percent
+    target: 75
+  - key: client_nps
+    label: Client NPS
+    unit: score
+    target: 50
+  - key: realization_rate
+    label: Realization Rate
+    unit: percent
+    target: 90
+  - key: vendor_on_time_pct
+    label: Vendor On-Time Delivery
+    unit: percent
+    target: 92
+
+workflows:
+  - name: retainer_management
+    owner: FinanceDirector
+  - name: project_utilization
+    owner: OperationsDirector
+    sla_target_pct: 88
+  - name: vendor_management
+    owner: OperationsDirector
+  - name: client_qbr
+    owner: ClientSuccessDirector
+
+rubric_overrides:
+  client_health: 0.20
+  operational_efficiency: 0.20
+  people_capacity: 0.15
+
+required_filings:
+  - Business license renewal
+  - Contractor 1099 filings
+
+evidence_focus:
+  - contract
+  - project_status
+  - communication

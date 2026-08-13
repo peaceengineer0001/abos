@@ -22,3 +22,13 @@ pydantic>=2.6.0        # typed specs and API request/response models
 # --- Service / API layer (bus serve entrypoint + dashboard) ---
 fastapi>=0.110.0
 uvicorn[standard]>=0.29.0
+
+
+# ─────────────────────────────────────────────────────────────────────────────
+# ABOS — Agentic Business Operating System (additive layer)
+# ─────────────────────────────────────────────────────────────────────────────
+# coincurve is OPTIONAL: a C-speed libsecp256k1 binding used for fast BIP-340
+# Schnorr keypairs + signing. ABOS ships a pure-Python BIP-340 fallback
+# (abos/nostr/crypto.py) so it runs with zero native deps if coincurve is
+# unavailable — the fallback is wire-compatible, just slower.
+coincurve>=18.0.0     # optional fast Nostr crypto backend (BIP-340 Schnorr)

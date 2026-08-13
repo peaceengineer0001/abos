@@ -1,236 +1,245 @@
-# 🕊️ Peace Protocols — Raven Network
+# ABOS — Agentic Business Operating System
 
-> **Peace is an engineering problem.** Download the Raven Network, answer Raven's onboarding questions, and 20 sovereign AI agents immediately begin measuring, optimizing, and defending every dimension of your life — and your community's — toward mathematically-proven abundance.
+> A private fork of [peace-protocols](https://github.com/peaceengineer0001/peace-protocols)
+> extended with the **BOSS Framework** (Business Operating System Steward).
 
-[![License](https://img.shields.io/badge/license-Apache%202.0-blue.svg)](LICENSE)
-[![Built on Buzz](https://img.shields.io/badge/built%20on-block%2Fbuzz-orange.svg)](https://github.com/block/buzz)
-[![Nostr Native](https://img.shields.io/badge/protocol-Nostr%20NIP--01-purple.svg)](https://github.com/nostr-protocol/nips)
-[![Agents](https://img.shields.io/badge/agents-20-green.svg)](AGENTS.md)
-[![Version](https://img.shields.io/badge/version-0.1.0--MVP-lightgrey.svg)](#)
-[![Sovereignty](https://img.shields.io/badge/data-local--first-brightgreen.svg)](#-data-sovereignty)
+ABOS turns the Peace Protocols agent + Nostr substrate into a governed,
+multi-tenant operating system for running a real business with autonomous agents.
+It adds an **11-agent council** organized into four streams — **Govern, Run, Grow,
+Decide** — that coordinate over a real Nostr workspace bus, produce auditable
+**evidence**, and are gated by a **deterministic multi-tenant policy engine** so
+that risky or unauthorized actions are *provably* blocked before they happen.
 
----
-
-## 🌍 What Is This?
-
-The **Peace Protocols Raven Network** is an open-source, self-hostable desktop application that forks the [Buzz agent workspace](https://github.com/block/buzz) and pre-loads it with **20 custom AI agents** — 19 domain specialists and one orchestrating Chief of Staff named **Raven** — each programmed to measure, optimize, and defend a specific area of human sovereignty as defined by the [Peace Protocols whitepaper](whitepaper/Peace_Protocols.pdf) by **Raven Rolland Gregg** (Keetá Yeìl of the Lukaaẋ.ádi Clan).
-
-The core premise: **scarcity is not a natural condition — it is the outcome of extractive, centralized system design.** The Peace Protocols define 19 measurable areas of human life — **7 Sovereign Bodies** (inner sovereignty) and **12 Resource Realms** (outer sovereignty) — and provide mathematical formulas to measure and optimize each. The Raven Network deploys AI agents to apply these protocols continuously, recursively, and at scale — from a single individual to a 7,777-member global network.
+This repository is **additive**: everything from `peace-protocols` (the Raven
+agent prompts, the MCP bus, the math/whitepaper material, the Nostr concepts) is
+preserved intact under its original paths. The new code lives entirely under the
+`abos/` Python package plus `scripts/` and `tests/`.
 
 ---
 
-## 🧭 Core Design Principles
+## Why ABOS
 
-- 🔐 **Sovereignty-first** — All user data stays local or on a relay you control. Nothing leaves without explicit consent.
-- 📖 **Open by default** — Apache 2.0. Every agent prompt, formula, and config is visible and forkable.
-- 🕸️ **Federated by design** — Extends Buzz's Nostr-native, relay-gated architecture. Scales from one person to a global network without changing the protocol.
-- ♻️ **Recursively self-improving** — Every agent runs the 6D loop (Discover → Decipher → Design → Develop → Deploy → Defend), compounding gains over time.
-- 📐 **Multi-scale** — The same 20-agent stack operates identically for an individual, couple, family, clan, tribe, congregation, business, or nation.
+Most "AI business" demos are a single chatbot with tool access and no guardrails.
+ABOS is built around three hard requirements that a real operator cares about:
 
----
-
-## 🤖 The Raven Council — 20 Agents
-
-### The Master Orchestrator
-
-| # | Agent | Domain | Index | Channel |
-|---|---|---|---|---|
-| 20 | **🐦‍⬛ Raven** | Chief of Staff — Orchestrator | Peace Efficiency Index (Pe) + CVI | `#raven-command` |
-
-### 7 Sovereign Bodies (Inner Sovereignty)
-
-| # | Agent | Domain | Index | Channel |
-|---|---|---|---|---|
-| 1 | **✨ Starfire** | Spiritual Body — Coherence with Source | Spiritual Coherence Index (Sc) | `#starfire-spiritual` |
-| 2 | **🦉 Sage** | Mental Body — Systems Literacy | Information Flow Efficiency (IFE) | `#sage-mental` |
-| 3 | **🌊 River** | Emotional Body — Heart Coherence | HRV Coherence (HRVcoh) | `#river-emotional` |
-| 4 | **🪨 Stone** | Physical Body — Resource Security | Local Resource Autonomy (LRA) | `#stone-physical` |
-| 5 | **🔥 Ember** | Economic Body — Freedom from Debt | Debt Freedom Ratio (DFR) | `#ember-economic` |
-| 6 | **🌲 Cedar** | Cultural Body — Identity and Story | Cultural Continuity Index (CCI) | `#cedar-cultural` |
-| 7 | **⛰️ Summit** | Political Body — Decentralized Governance | Sovereignty Participation Ratio (SPR) | `#summit-political` |
-
-### 12 Resource Realms (Outer Sovereignty)
-
-| # | Agent | Domain | Index | Channel |
-|---|---|---|---|---|
-| 8 | **☀️ Sol** | Energy Realm | Energy Autonomy Ratio (EAR) | `#sol-energy` |
-| 9 | **💧 Tide** | Water Realm | Water Sovereignty Index (WSI) | `#tide-water` |
-| 10 | **🌱 Root** | Food Realm | Local Nutrition Ratio (LNR) | `#root-food` |
-| 11 | **❤️‍🩹 Heal** | Health Realm | Wellness Autonomy Index (WAI) | `#heal-health` |
-| 12 | **🏠 Haven** | Shelter Realm | Housing Independence Score (HIS) | `#haven-shelter` |
-| 13 | **🔄 Cycle** | Waste Realm | Circularity Index (CI) | `#cycle-waste` |
-| 14 | **📚 Lore** | Education Realm | Knowledge Liberation Index (KLI) | `#lore-education` |
-| 15 | **🕸️ Mesh** | Communication Realm | Freedom of Flow Ratio (FFR) | `#mesh-communication` |
-| 16 | **🚢 Passage** | Transportation Realm | Mobility Autonomy Fraction (MAF) | `#passage-transportation` |
-| 17 | **⚒️ Forge** | Manufacturing Realm | Regenerative Production Ratio (RPR) | `#forge-manufacturing` |
-| 18 | **🌾 Thrive** | Economics Realm | Abundance Finance Index (AFI) | `#thrive-economics` |
-| 19 | **⚖️ Council** | Governance Realm | Justice Coherence Index (JCI) | `#council-governance` |
-
-> Full agent guide with system prompts, intake questions, and MCP connection instructions: **[AGENTS.md](AGENTS.md)**
+1. **Governance is deterministic, not vibes.** Every consequential action passes
+   through a policy engine that returns `ALLOW`, `REQUIRES_APPROVAL`, or `DENY`
+   with a machine-readable reason and an audit-log entry. The same input always
+   yields the same decision. Denials are not "the model declined" — they are code.
+2. **Multi-tenant isolation.** Six very different businesses run side by side.
+   No agent in one tenant can see or act on another tenant's data. Isolation is
+   enforced in the policy layer, not by prompt etiquette.
+3. **Real protocol, not a mock.** Agents talk over a real **Nostr** event bus.
+   Every message is a signed Nostr event (NIP-01) with a real secp256k1 /
+   BIP-340 Schnorr signature; the workspace uses **NIP-28 public channels**. You
+   can point the bus at any external relay.
 
 ---
 
-## 🚀 Quick Start
+## The BOSS Council (11 agents, 4 streams)
+
+| Stream | Agent | Role |
+| ------ | ----- | ---- |
+| **Govern** | `ComplianceOfficer` | Regulatory / licensing gap detection, controls |
+| **Govern** | `SecuritySteward` | Access, secrets, threat posture |
+| **Govern** | `RiskManager` | Risk scoring, high-risk pauses |
+| **Run** | `OperationsLead` | Day-to-day execution, SOPs, throughput |
+| **Run** | `FinanceController` | Spend, cash, payment authorization |
+| **Run** | `PeopleOps` | Staffing, scheduling, HR guardrails |
+| **Grow** | `GrowthStrategist` | Pipeline, funnel, LTV:CAC |
+| **Grow** | `MarketingLead` | Campaigns, brand, content |
+| **Grow** | `ClientSuccess` | Retention, NPS, escalations |
+| **Decide** | `Analyst` | Evidence synthesis, scorecards |
+| **Decide** | `Coordinator` | Orchestration, decision routing, approvals |
+
+Agents are created through a **Council factory** (`abos.agents.build_council`).
+Each agent gets its own real Nostr identity (secp256k1 keypair) and posts to the
+workspace channels it is authorized for.
+
+---
+
+## Architecture at a glance
+
+```
+                 ┌──────────────────────────────────────────────┐
+                 │                 FastAPI API                    │
+                 │  /tenants  /agents  /evidence  /decisions  /demo│
+                 └───────────────┬───────────────────────────────┘
+                                 │
+        ┌────────────────────────┼────────────────────────┐
+        │                        │                         │
+  ┌───────────┐          ┌───────────────┐          ┌──────────────┐
+  │  Policy   │          │  Council of 11 │          │   Evidence   │
+  │  Engine   │◄────────►│   BOSS agents  │─────────►│   + Scorecard│
+  │(determin- │  gates   │ (Govern/Run/   │ produce  │   (7-metric  │
+  │ istic)    │          │  Grow/Decide)  │          │    rubric)   │
+  └───────────┘          └───────┬────────┘          └──────────────┘
+                                 │ signed events
+                         ┌───────▼────────┐
+                         │  Nostr bus     │
+                         │  NIP-28 chans  │  #compliance #ops #finance
+                         │  NIP-01 events │  #growth #decisions
+                         └────────────────┘
+```
+
+See **[ARCHITECTURE_ABOS.md](ARCHITECTURE_ABOS.md)** for the full design. The
+original Peace Protocols architecture remains in **[ARCHITECTURE.md](ARCHITECTURE.md)**.
+
+---
+
+## Quick start
+
+Requires Python 3.10+.
 
 ```bash
-# 1. Clone with the Buzz submodule
-git clone --recurse-submodules https://github.com/peaceengineer0001/peace-protocols.git
-cd peace-protocols
+# 1. Install dependencies
+pip install -r requirements.txt
+#    (coincurve is optional but strongly recommended — it makes Nostr signing
+#     ~500x faster. A pure-python BIP-340 fallback is used if it is absent.)
 
-# 2. Run the one-command setup (installs deps, initializes Buzz, configures agents)
-./scripts/setup.sh
+# 2. Seed the six demo businesses (writes demo_state.json)
+python3 scripts/seed_demo.py
 
-# 3. Launch the Raven Network
-./scripts/launch-raven.sh
+# 3. Run the scripted BOSS demo (two governance scenarios)
+python3 scripts/run-boss-demo.py
+
+# 4. Start the API
+uvicorn abos.api.main:app --reload
+#    -> http://127.0.0.1:8000/docs   (interactive OpenAPI)
 ```
 
-On first launch, **Raven** greets you and runs the onboarding sequence:
-
-1. **Scope Selection** — Who are we optimizing for? (Individual → Nation)
-2. **Identity Context** — Your name, location, lineage/tradition (optional)
-3. **Domain Intake** — Each of the 19 agents collects its baseline data
-4. **Baseline Calculation** — Raven computes your initial **Pe** and **CVI** scores
-5. **Priority Identification** — Your three highest-leverage opportunities
-6. **Activation** — The 6D loop begins across all domains
-
-See the full walkthrough in **[docs/getting-started.md](docs/getting-started.md)**.
+On startup the API auto-seeds from `demo_state.json` if present, otherwise it
+seeds fresh in-memory.
 
 ---
 
-## 📐 Scope Levels
+## The demo
 
-The same 20-agent stack scales across **9 levels of human organization**:
+`scripts/run-boss-demo.py` runs two deterministic governance scenarios end to end:
 
-| Level | Description | Typical First Focus |
-|---|---|---|
-| **Individual** | Single person | DFR, LRA, EAR |
-| **Couple** | Two partners | HIS, AFI, Sc |
-| **Family** | Nuclear family (~6) | LNR, HIS, KLI |
-| **House** | Extended/communal household | EAR, WSI, CI |
-| **Clan** | Extended family network (~30) | LNR, MAF, AFI |
-| **Tribe** | Community/neighborhood (~150) | All 12 realms, SPR |
-| **Church Congregation** | Spiritual community | Sc, CCI, AFI, WAI |
-| **Business** | Organization/enterprise | EAR, RPR, AFI, FFR |
-| **Nation** | Large community/nation-state | All 19 domains + λ₂ |
+1. **Two-vessel review pauses the high-risk job.** The marine-services tenant
+   submits two vessel jobs. The RiskManager + ComplianceOfficer score both; the
+   high-risk vessel (missing documentation) is routed to `REQUIRES_APPROVAL` and
+   paused, while the low-risk one proceeds. Every step is a signed Nostr event.
+2. **Unauthorized payment is blocked.** A `viewer`-role actor attempts to
+   authorize a large payment. The policy engine returns `DENY` with an explicit
+   reason and writes an audit entry. The FinanceController never executes it.
 
-Configure your scope in **[docs/scope-selector.md](docs/scope-selector.md)**.
+Both outcomes are produced by code, not by model discretion, so they are
+identical on every run.
 
 ---
 
-## 📊 The Master Metrics
+## Six business templates
 
-**Peace Efficiency Index** — the sum of regenerative output over dependency across all 12 realms:
+Deterministic, fully-seeded demo tenants live in `abos/templates/`:
 
-```
-Pe = Σ (Rᵢ / Dᵢ)   for i = 1..12
-```
+| Template | Business type |
+| -------- | ------------- |
+| `saas_startup` | B2B SaaS startup |
+| `boutique_agency` | Creative / marketing agency |
+| `marine_services` | Marine vessel services (USCG-regulated) |
+| `restaurant_group` | Multi-location restaurant group |
+| `retail_brand` | DTC retail brand |
+| `professional_services` | Licensed professional services firm |
 
-**Community Vitality Index** — the ratio of vitality drivers to depletion drivers:
-
-```
-CVI = (H + Dg + F) / (S + Db + De)
-```
-
-Learn the math: [Pe](docs/math/peace-efficiency-index.md) · [CVI](docs/math/community-vitality-index.md) · [Stability Theorem](docs/math/stability-theorem.md) · [Resilience Delta](docs/math/resilience-delta.md)
-
----
-
-## 🔐 Data Sovereignty
-
-All measurement data is stored **locally by default** on a Buzz relay running on your own machine. Four privacy tiers let you decide exactly what — if anything — is ever shared:
-
-- **Tier 1 — Local Only** (default): nothing leaves the device
-- **Tier 2 — Self-Hosted Relay**: sync across *your* devices only
-- **Tier 3 — Chapter Relay**: opt-in sharing with a Peace Engineer chapter
-- **Tier 4 — Keystone Node**: anonymized aggregate indices only
-
-Sensitive domains (**Ember** financial data, **River** biometric data) are always Tier 1 unless you actively promote them.
+Each template carries its own role map, scorecard rubric, and seed scenario.
 
 ---
 
-## 🏗️ Architecture
+## API surface
 
-The Raven Network is a **content and configuration overlay** on top of Buzz. We do **not** modify Buzz source — Buzz is included as a git submodule and we layer Peace Protocols agents, workflows, math, and custom Nostr kinds (`30100–30105`) on top.
+All routes are served under the `/api` prefix.
 
-See **[ARCHITECTURE.md](ARCHITECTURE.md)** for the full technical design.
+| Method | Path | Purpose |
+| ------ | ---- | ------- |
+| `GET` | `/api/health` | Liveness |
+| `POST` | `/api/demo/seed` | Seed / reseed all six demo tenants |
+| `POST` | `/api/demo/seed/{business_type}` | Seed a single business type |
+| `POST` | `/api/demo/reset` | Reset the in-memory store |
+| `GET` | `/api/templates` | List available business templates |
+| `GET` | `/api/tenants` | List tenants |
+| `GET` | `/api/tenants/{tenant_id}` | Tenant detail |
+| `GET` | `/api/tenants/{tenant_id}/users` | Users / roles for a tenant |
+| `POST` | `/api/tenants/{tenant_id}/run-council` | Run the 11-agent council |
+| `GET` | `/api/tenants/{tenant_id}/workspace` | Nostr workspace feed |
+| `GET` | `/api/agents` | Council roster / agent catalog |
+| `GET` | `/api/scorecard/{tenant_id}` | 7-metric scorecard |
+| `GET` | `/api/evidence` | Evidence across tenants |
+| `GET` | `/api/evidence/{tenant_id}` | Evidence log for a tenant |
+| `GET` | `/api/audit/{tenant_id}` | Policy audit log |
+| `GET` | `/api/decisions` | List decisions |
+| `POST` | `/api/decisions/dispatch` | Submit an action for governance |
+| `POST` | `/api/decisions/{decision_id}/approve` | Approve a pending decision |
+| `POST` | `/api/decisions/{decision_id}/deny` | Deny a pending decision |
+
+Role-gated actions return **HTTP 403** with a policy reason when the caller's
+role is insufficient (e.g. a `viewer` attempting a payment authorization).
 
 ---
 
-## ⚡ v2 Upgrade — Agent Capability Layer & 22 Integrations
+## Nostr layer
 
-The **v2 upgrade** (branch `feature/v2-upgrades`) layers an **Agent Zero
-capability layer** on top of the Buzz substrate and connects **22 upstream
-capabilities** through a new **Unified MCP Bus**:
+The `abos/nostr/` package is a self-contained, dependency-light Nostr
+implementation:
 
-- 🧠 **Massive local inference** — [AirLLM](integrations/airllm/) is the
-  **primary** backend (frontier models on consumer GPUs); cloud APIs are
-  fallback only.
-- 🗣️ **Voice** — [VoxCPM](integrations/voxcpm/) TTS +
-  [Speech-to-Speech](integrations/speech_to_speech/) realtime pipeline.
-- 🕸️ **Web & context** — [Scrapling](integrations/scrapling/),
-  [LeanCTX](integrations/leanctx/) (60–90% token reduction),
-  [Ego-Lite](integrations/ego_lite/), [OpenCodeReview](integrations/opencodereview/).
-- 🌐 **Situational awareness** — [World Monitor](integrations/worldmonitor/),
-  [OSIRIS](integrations/osiris/), [ha-mcp](integrations/ha_mcp/) smart home.
-- 🎬 **Media & design** — [VideoAgent](integrations/videoagent/),
-  [LongCat-Video](integrations/longcat_video/), [CADAM](integrations/cadam/),
-  [img2threejs](integrations/img2threejs/), [HiveTalk SFU](integrations/hivetalk_sfu/),
-  [Bananas](integrations/bananas/).
-- 💸 **Community economy** — [Shopstr](integrations/shopstr/) +
-  [LND](integrations/lnd/) Nostr Bitcoin commerce.
-- 🖥️ **Multi-OS** — reference **NixOS "PeaceOS"** (`nixos/`), **Windows 11**
-  (`platforms/windows/`), and **macOS Homebrew tap** (`platforms/macos/`).
+- `crypto.py` — secp256k1 keypairs + BIP-340 Schnorr signatures. Uses
+  `coincurve` when available, with a correct pure-python fallback. Both backends
+  are wire-compatible.
+- `events.py` — NIP-01 event construction, IDs, and signing. Custom BOSS kinds
+  `31000–31009` plus NIP-28 kinds `40/41/42`.
+- `relay.py` — an in-process `LocalRelay` for demos/tests and a `WebsocketRelay`
+  for talking to real external relays.
+- `channels.py` — the `WorkspaceBus`: five NIP-28 public channels
+  (`#compliance`, `#ops`, `#finance`, `#growth`, `#decisions`).
 
-The bus (`mcp_bus/`) provides concurrent connections, health monitoring,
-auto-reconnection, fault isolation, and **license/consent gating**
-(GHOST is non-commercial; Heretic is consent-gated and off by default).
+---
 
-> 🚧 The 22 integrations ship as **production-shaped scaffolds** — adapter
-> contract, config, and bus registration are in place and unit-tested; live
-> tool calls require the upstream service to be installed/running. See
-> **[docs/v2-upgrade.md](docs/v2-upgrade.md)**, **[integrations/README.md](integrations/README.md)**,
-> and **[docs/LICENSE-COMPLIANCE.md](docs/LICENSE-COMPLIANCE.md)**.
+## Tests
 
 ```bash
-pip install pyyaml pytest
-python3 scripts/validate_mcp_registry.py   # validate the 23-server registry
-python3 -m mcp_bus.serve --once            # bring the bus up, print health
-python3 -m pytest tests/ -v                # bus unit tests (8/8)
+python3 tests/test_boss_checks.py
+```
+
+Covers keypair generation, cross-backend signature compatibility, deterministic
+policy denial, multi-tenant isolation, evidence production, scorecard scoring,
+and template loading.
+
+---
+
+## Repository layout (new code)
+
+```
+abos/
+  tenant.py          TenantRuntime + TenantStore
+  demo.py            deterministic seed scenarios for 6 businesses
+  core/
+    agent.py         BossAgent base + AgentIdentity
+    policy.py        PolicyEngine (deterministic ALLOW/APPROVAL/DENY + audit)
+    evidence.py      evidence records
+    scorecard.py     7-metric rubric
+    approval.py      ApprovalQueue + GovernedDecision
+  agents/
+    govern/ run/ grow/ decide/   the 11 BOSS agents + Council factory
+  nostr/             crypto, events, relay, channels
+  templates/         6 business YAMLs + loader
+  api/               FastAPI app, models, state, routes/
+scripts/
+  seed_demo.py       writes demo_state.json
+  run-boss-demo.py   scripted two-scenario demo
+tests/
+  test_boss_checks.py
 ```
 
 ---
 
-## 📄 Whitepaper & Documents
+## Relationship to peace-protocols
 
-The foundational documents live in **[whitepaper/](whitepaper/)**:
+ABOS is a **private downstream fork**. It does not modify or remove any upstream
+Peace Protocols material; it layers the BOSS Framework on top. If upstream
+changes, this fork can rebase and keep the `abos/` package unchanged.
 
-- **[Peace_Protocols.pdf](whitepaper/Peace_Protocols.pdf)** — the foundational whitepaper
-- **[Peace_Protocols_Citations.pdf](whitepaper/Peace_Protocols_Citations.pdf)** — citation bundle
-- **[Peace_Protocols_Review_Comments.pdf](whitepaper/Peace_Protocols_Review_Comments.pdf)** — third-party mathematical review
-- **[PEACE_Ecosystem_Master_Business_Plan.pdf](whitepaper/PEACE_Ecosystem_Master_Business_Plan.pdf)** — ecosystem master plan
-- **[PEACE_Ecosystem_Executive_Teaser.pdf](whitepaper/PEACE_Ecosystem_Executive_Teaser.pdf)** — executive teaser
-- **[PEACE_Ecosystem_Org_Structure.pdf](whitepaper/PEACE_Ecosystem_Org_Structure.pdf)** — organizational structure
+## License
 
----
-
-## 🤝 Contributing
-
-We welcome contributions from any Peace Engineer or aligned developer. Read **[CONTRIBUTING.md](CONTRIBUTING.md)** and our **[CODE_OF_CONDUCT.md](CODE_OF_CONDUCT.md)** (respect · reciprocity · regeneration).
-
----
-
-## 📜 License
-
-Licensed under the **Apache License 2.0** — same as [block/buzz](https://github.com/block/buzz). See **[LICENSE](LICENSE)**.
-
-Chosen intentionally: maximum compatibility, minimum friction for adoption by governments, indigenous communities, NGOs, and businesses.
-
----
-
-<div align="center">
-
-**Peace Engineers LLC** · [PeaceProtocols.org](https://peaceprotocols.org)
-
-*"7,777 without hierarchy" — implemented in software.*
-
-</div>
+Inherits the upstream license (see [LICENSE](LICENSE)). Private repository —
+not for public distribution.
