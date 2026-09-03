@@ -241,5 +241,4 @@ changes, this fork can rebase and keep the `abos/` package unchanged.
 
 ## License
 
-Inherits the upstream license (see [LICENSE](LICENSE)). Private repository —
-not for public distribution.
+Inherits the upstream license (see [LICENSE](LICENSE)).
