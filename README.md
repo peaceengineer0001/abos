@@ -235,7 +235,7 @@ tests/
 
 ## Relationship to peace-protocols
 
-ABOS is a **private downstream fork**. It does not modify or remove any upstream
+ABOS is a **downstream fork**. It does not modify or remove any upstream
 Peace Protocols material; it layers the BOSS Framework on top. If upstream
 changes, this fork can rebase and keep the `abos/` package unchanged.
 
